@@ -3,16 +3,18 @@ var InputEnviarNuevoMensaje = document.getElementsByName("w-message-input")[0];
 var contenedorMensajes = document.getElementById("chat");
 var boton = document.getElementById("enviar");
 var mensaje = document.getElementById("mensaje");
-var usuarios = document.querySelectorAll(".w-recent-chats li")[1];
-// var header =  document.querySelector(".w-chat-profile");
-// var array = [document.querySelectorAll(".w-recent-chats li")[0], document.querySelectorAll(".w-recent-chats li")[1],document.querySelectorAll(".w-recent-chats li")[2],document.querySelectorAll(".w-recent-chats li")[3],document.querySelectorAll(".w-recent-chats li")[4]];
+var header =  document.querySelector(".w-chat-profile");
+var fotoPerfil = document.querySelector(".w-chat-profile img");
 function enviarMensaje(){
 	InputEnviarNuevoMensaje.addEventListener("keypress", function(){
 		if(event.keyCode == 13){
 			nuevoMensajeEnviado();
 		}
 	});
-	usuarios.addEventListener("click", cambiarPerfil);
+	var hijos = document.querySelectorAll(".w-recent-chats li .avatar");
+	for (var i = 0; i< hijos.length; i++) {
+				hijos[i].addEventListener("click", cambio);
+	}
 }
 
 function nuevoMensajeEnviado(){
@@ -40,38 +42,13 @@ function nuevoMensajeEnviado(){
 	InputEnviarNuevoMensaje.value = "";
 	return divWmessageOut;
 }
-function cambiarPerfil(){
-	var header =  document.querySelector(".w-chat-profile img");
-	var h4 = document.querySelector(".w-chat-profile h4");
-	var avatar = document.querySelectorAll(".w-recent-chats li .avatar img")[1];
-	var avatarH4 = document.querySelectorAll(".w-recent-chats li .avatar h4")[1];
-	header.setAttribute("src", "image/raymi.jpg");
+
+function cambio(){
+  var perfil = this.childNodes[1].getAttribute("src");
+  fotoPerfil.setAttribute("src", perfil);
+  var nombreUsuario = this.childNodes[3].textContent;
+  var texto = document.querySelector(".w-chat-profile .w-contact-name");
+  texto.textContent = nombreUsuario;
+  var listaNombres =  document.querySelector(".w-chat-profile .w-users-messages");
+  listaNombres.style.display = "none";
 }
-
-
-
-
-
-	// array.addEventListener("click", function(){
-	// 	for (var i = 0; i <= array.length; i++) {
-	// 		array[i].addEventListener("click", function(){
-	// 			header.style.backgroundColor = "yellow";
-	// 		})
-	// 	}
-	// });
-	// array[0,1,2,3].addEventListener("click", nuevaConversacion);
-	// 	array[].addEventListener("click", function(){
-	// 			header.style.backgroundColor = "yellow";
-	// });
-// function nuevaConversacion(){
-// 	for (var i = 0; i <= array.length; i++) {
-// 		array[i].addEventListener("click", function(){
-// 			header.style.backgroundColor = "yellow";
-// 		})
-// 	}
-// }
-// function nuevaConversacion(){
-// 	this.primerUsuario = document.querySelectorAll(".w-recent-chats li")[0];
-// 	this.segundoUsuario = document.querySelectorAll(".w-recent-chats li")[1];
-// 	this.tercerUsuario
-// }
